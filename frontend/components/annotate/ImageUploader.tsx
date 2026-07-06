@@ -31,34 +31,37 @@ export default function ImageUploader({ onUploaded }: Props) {
   };
 
   return (
-    <label className="inline-flex items-center gap-2 px-4 py-2 text-sm border border-zinc-300 rounded-md cursor-pointer hover:bg-zinc-50 transition-colors">
+    <label
+      id="upload-image-btn"
+      className="btn-primary"
+      style={{ cursor: uploading ? "not-allowed" : "pointer", opacity: uploading ? 0.7 : 1 }}
+    >
       <input
         ref={inputRef}
         type="file"
         accept="image/*"
         onChange={handleUpload}
         className="hidden"
+        disabled={uploading}
       />
       {uploading ? (
-        <div className="w-4 h-4 border-2 border-zinc-300 border-t-zinc-600 rounded-full animate-spin" />
-      ) : (
-        <svg
-          className="w-4 h-4 text-zinc-500"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={2}
-            d="M12 4v16m8-8H4"
+        <>
+          <div
+            className="w-4 h-4 border-2 rounded-full"
+            style={{ borderColor: "rgba(255,255,255,0.3)", borderTopColor: "white", animation: "spin 0.7s linear infinite" }}
           />
-        </svg>
+          Uploading…
+        </>
+      ) : (
+        <>
+          <svg width="15" height="15" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
+            <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4" />
+            <polyline points="17 8 12 3 7 8" />
+            <line x1="12" y1="3" x2="12" y2="15" />
+          </svg>
+          Upload Image
+        </>
       )}
-      <span className="text-zinc-600">
-        {uploading ? "Uploading..." : "Upload Image"}
-      </span>
     </label>
   );
 }

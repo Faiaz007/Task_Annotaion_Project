@@ -15,9 +15,9 @@ import TaskModal from "./TaskModal";
 import type { Task } from "@/stores/taskStore";
 
 const columns = [
-  { status: "todo", label: "To Do", color: "#6b7280" },
-  { status: "in_progress", label: "In Progress", color: "#3b82f6" },
-  { status: "done", label: "Done", color: "#22c55e" },
+  { status: "todo", label: "To Do", color: "#94a3b8" },
+  { status: "in_progress", label: "In Progress", color: "#4f8ef7" },
+  { status: "done", label: "Done", color: "#34d399" },
 ];
 
 export default function Board() {
@@ -79,7 +79,7 @@ export default function Board() {
   if (loading) {
     return (
       <div className="flex items-center justify-center h-48">
-        <div className="w-6 h-6 border-2 border-zinc-300 border-t-zinc-600 rounded-full animate-spin" />
+        <div className="spinner" />
       </div>
     );
   }
@@ -87,7 +87,12 @@ export default function Board() {
   if (error) {
     return (
       <div className="flex items-center justify-center h-48">
-        <p className="text-sm text-red-500">{error}</p>
+        <div
+          className="px-4 py-3 rounded-lg text-sm"
+          style={{ background: "rgba(239,68,68,0.1)", border: "1px solid rgba(239,68,68,0.25)", color: "#f87171" }}
+        >
+          {error}
+        </div>
       </div>
     );
   }
@@ -95,7 +100,7 @@ export default function Board() {
   return (
     <>
       <DndContext sensors={sensors} onDragEnd={handleDragEnd}>
-        <div className="flex gap-4 overflow-x-auto pb-4">
+        <div className="flex gap-4 h-full">
           {columns.map((col) => (
             <Column
               key={col.status}

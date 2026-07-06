@@ -5,7 +5,12 @@ interface DateState {
   setSelectedDate: (date: string | null) => void;
 }
 
+function todayISO() {
+  const d = new Date();
+  return d.toISOString().split("T")[0];
+}
+
 export const useDateStore = create<DateState>()((set) => ({
-  selectedDate: null,
+  selectedDate: todayISO(),
   setSelectedDate: (selectedDate) => set({ selectedDate }),
 }));
